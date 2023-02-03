@@ -31,4 +31,13 @@ for tc in range(1, T+1):
             i += 1
     print(f'#{tc} {cnt}')
 
+# for j in range(1, M+2):
+#     if arr[i-1] + K < st[i]:
+#         cnt = 0
+#         break
+#
+#     if i + K < st[i]:
+#         i = st[i-1]
+#         cnt += 1
+
 
