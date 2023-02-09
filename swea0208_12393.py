@@ -37,6 +37,7 @@ for tc in range(1, T+1):
                 # found = False
                 break
         else:
+            pass
             #잡았다 요놈...
 
         # if found:
