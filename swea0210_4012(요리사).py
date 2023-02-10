@@ -3,18 +3,13 @@ for tc in range(1, T+1):
     N = int(input())
     sco = [list(map(int, input().split())) for _ in range(N)]
 
-    #자료 N개일때 나올수 있는 가짓수 구하기 = (N*(N-1)) // 4
-
-    #나올 수 있는 조합 구하기
-    all_combi = []
-    for i in range(N):
-        for j in range(i+1,N):
-            all_combi.append([i,j])
-    able_combi =[ ]
-    for i in range(len(all_combi)):
-        a = all_combi[i][0]
-        b = all_combi[i][1]
-        for j in range(i+1, len(all_combi)):
+    #조합 구하기
+    num = []
+    re_num = []
+    for i in range(N//2):
+        num.append(i)
+        re_num.append((N//2)+i)
+    print(num, re_num)
 
 
 
@@ -28,9 +23,14 @@ for tc in range(1, T+1):
 
 
 
-
-
-
+# a = [(1, 3, 5), (2, 4, 5), (7, 8, 9)]
+# for i in range(len(a)):
+#     for j in range(len(a)):
+#         print(a[i][j], a[j])
+#         if a[i][j] in a[j]:
+#             print('True')
+#         else:
+#             print('False')
 
     # sij = []
     # for i in range(N):
@@ -54,3 +54,5 @@ for tc in range(1, T+1):
     #         if min_val > food_sum:
     #             min_val = food_sum
     # print(f'#{tc} {min_val}')
+
+
