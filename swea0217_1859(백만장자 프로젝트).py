@@ -3,14 +3,15 @@ for tc in range(1, T+1):
     N = int(input())
     price = list(map(int, input().split()))
 
-    #가장 큰 값의 위치 구해서 처음부터 가장 큰값전까지의 차이값 더하고
-    #최댓값까지 제거하고
-    #다시 남은 값 중에서 가장큰 값 구해서 처음부터 가장 큰 값 전까지의 차이값 더해서
-    #마지막에 다다르는 방법
-    earn = 0
-    i = 0
-    a = 0
-    max_idx = price.index(max(price))
+    profit = 0
+    max_price = price[-1]
+    for i in range(N-2, -1, -1):
+        if max_price < price[i]:
+            max_price = price[i]
+        else:
+            profit += max_price - price[i]
+    print(f'#{tc} {profit}')
+
     # while True:
     #     if price[i] <= price[i+1]:
     #         while price[i] <= price[i+1]:
@@ -24,4 +25,4 @@ for tc in range(1, T+1):
     #     if i >= len(price) - 1:
     #         break
 
-    print(f'#{tc} {earn}')
+    # print(f'#{tc} {earn}')
