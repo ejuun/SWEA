@@ -5,23 +5,34 @@ for tc in range(1, T+1):
 
     #조합 구하기
     num = list(range(1, N+1))
-    combi_list = []
+    com_l = []
     for i in range(1 << len(num)):
         combi = []
         for j in range(N):
             if i & (1 << j):
                 combi.append(num[j])
-        combi_list.append(combi)
+        com_l.append(combi)
+    com_l.sort(key= lambda x: len(x))
 
-    combi_list.sort(key= lambda x: len(x))
+    #최솟값 구하기
+    min_score = 10000
 
-    able = []
+    for i in range(len(com_l)):
 
-    for i in range(len(combi_list)):
-        if len(combi_list[i]) == N //2:
-            able.append([combi_list[i],combi_list[len(combi_list) -1 -i]])
+        if len(com_l[i]) == N // 2:
+            a = 0
+            b = 0
+            for j in range(N//2):
+                a += sco[com_l[i][j]-1][com_l[i][(N//2)-1-j]-1]
+                b += sco[com_l[len(com_l)-1-i][j]-1][com_l[len(com_l)-1-i][(N//2)-1-j]-1]
+            # print('a',sco[com_l[i][j]-1][com_l[i][(N//2)-1-j]-1])
+            # print('b',sco[com_l[len(com_l)-1-i][j]-1][com_l[len(com_l)-1-i][(N//2)-1-j]-1])
+            score = abs(a-b)
+            if min_score > score:
+                min_score = score
 
-    #
+    print(f'#{tc} {min_score}')
+
 
 
 
