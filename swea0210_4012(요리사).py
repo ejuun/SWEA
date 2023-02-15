@@ -4,15 +4,24 @@ for tc in range(1, T+1):
     sco = [list(map(int, input().split())) for _ in range(N)]
 
     #조합 구하기
-    num = []
-    re_num = []
-    for i in range(N//2):
-        num.append(i)
-        re_num.append((N//2)+i)
-    print(num, re_num)
+    num = list(range(1, N+1))
+    combi_list = []
+    for i in range(1 << len(num)):
+        combi = []
+        for j in range(N):
+            if i & (1 << j):
+                combi.append(num[j])
+        combi_list.append(combi)
 
+    combi_list.sort(key= lambda x: len(x))
 
+    able = []
 
+    for i in range(len(combi_list)):
+        if len(combi_list[i]) == N //2:
+            able.append([combi_list[i],combi_list[len(combi_list) -1 -i]])
+
+    #
 
 
 
