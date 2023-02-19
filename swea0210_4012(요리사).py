@@ -7,34 +7,34 @@ for tc in range(1, T+1):
     num = list(range(1, N+1))
     com_l = []
     for i in range(1 << len(num)):
-        combi = []
+        com = []
         for j in range(N):
             if i & (1 << j):
-                combi.append(num[j])
-        com_l.append(combi)
+                com.append(num[j])
+        com_l.append(com)
     com_l.sort(key= lambda x: len(x))
+    ans = []
+    for i in range(len(com_l)):
+        if len(com_l[i]) == N // 2:
+            ans.append(com_l[i])
 
     #최솟값 구하기
-    min_score = 10000
-
-    for i in range(len(com_l)):
-
-        if len(com_l[i]) == N // 2:
-            a = 0
-            b = 0
-            for j in range(N//2):
-                a += sco[com_l[i][j]-1][com_l[i][(N//2)-1-j]-1]
-                b += sco[com_l[len(com_l)-1-i][j]-1][com_l[len(com_l)-1-i][(N//2)-1-j]-1]
-            # print('a',sco[com_l[i][j]-1][com_l[i][(N//2)-1-j]-1])
-            # print('b',sco[com_l[len(com_l)-1-i][j]-1][com_l[len(com_l)-1-i][(N//2)-1-j]-1])
-            score = abs(a-b)
-            if min_score > score:
-                min_score = score
-
-    print(f'#{tc} {min_score}')
-
-
-
+    min_val = 100000000
+    #ans길이의 반만큼
+    for i in range(len(ans)//2):
+        A = B = 0
+        for j in range(N // 2):
+            for k in range(N//2):
+                if k == j:
+                    continue
+                A += sco[ans[i][j]-1][ans[i][k]-1]
+                      # + sco[ans[i][k]-1][ans[i][j]-1])
+                B += sco[ans[len(ans)-1-i][j]-1][ans[len(ans)-1-i][k]-1]
+                      # + sco[ans[len(ans)-1-i][k]-1][ans[len(ans)-1-i][j]-1])
+        val = abs(A-B)
+        if min_val > val:
+            min_val = val
+    print(f'#{tc} {min_val}')
 
 
 
