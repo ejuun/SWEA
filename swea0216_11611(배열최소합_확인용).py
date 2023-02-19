@@ -46,32 +46,72 @@
 #     ans = 0xffffff
 #     perm(0, N, 0)
 #     print(ans)
+
+
+# T = int(input())
+# for tc in range(1, T+1):
+#     N = int(input())
+#     m = [list(map(int, input().split()))for _ in range(N)]
+#
+#     col = [i for i in range(N)]
+#     #col[0] ==> 0번행의 열의 위치
+#     #col[1] ==> 1번행의 열의 위치
+#
+#     def perm(k, n, cur_sum):
+#         global ans
+#
+#         if k == n:
+#              s = 0
+#              for i in range(n):
+#                  s += m[i][col[i]]
+#                  print(m[i][col[i]], end=' ')
+#              print('==>', s, cur_sum)
+#              if ans > s:
+#                  ans = s
+#         else:
+#             for i in range(k, N):
+#                 col[k], col[i] = col[i], col[k]
+#                 perm(k+1, n, cur_sum + m[k][col[k]])
+#                 col[k], col[i] = col[i], col[k]
+#
+#     ans = 0xffffff
+#     perm(0, N, 0)
+#     print(ans)
+
 T = int(input())
 for tc in range(1, T+1):
     N = int(input())
-    m = [list(map(int, input().split()))for _ in range(N)]
+    m = [list(map(int, input().split())) for _ in range(N)]
 
+    #순열에 사용할 열 생성
     col = [i for i in range(N)]
-    #col[0] ==> 0번행의 열의 위치
-    #col[1] ==> 1번행의 열의 위치
+    #초기 최솟값, 정답값 생성
+    min_val = 101
 
-    def perm(k, n, cur_sum):
-        global ans
+    def find(i, n, cur_sum):
+        global min_val
+        global col
 
-        if k == n:
-             s = 0
-             for i in range(n):
-                 s += m[i][col[i]]
-                 print(m[i][col[i]], end=' ')
-             print('==>', s, cur_sum)
-             if ans > s:
-                 ans = s
+        #만약 중간이라도 합산 값이 최솟값 보다 클 경우 종료
+        if cur_sum > min_val:
+            return
+
+        if i == n:
+            s = 0
+            for j in range(n):
+                s += m[j][col[j]]
+                print(j, col[j], end=' ')
+            print()
+            if min_val > s:
+                min_val = s
+                return
+
         else:
-            for i in range(k, N):
-                col[k], col[i] = col[i], col[k]
-                perm(k+1, n, cur_sum + m[k][col[k]])
-                col[k], col[i] = col[i], col[k]
+            for j in range(i, n):
+                col[i], col[j] = col[j], col[i]
+                find(i+1, n, cur_sum + m[i][col[i]])
+                col[i], col[j] = col[j], col[i]
 
-    ans = 0xffffff
-    perm(0, N, 0)
-    print(ans)
+    find(0, N, 0)
+
+    print(f'#{tc} {min_val}')
