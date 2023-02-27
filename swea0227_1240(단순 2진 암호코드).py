@@ -27,16 +27,16 @@ for tc in range(1, T+1):
         if s_row:
             break
 
-    s_col = 0
-    for i in range(0, M, 7):
-        if 1 in code[s_row][i:i+7]:
-            s_col = i
+    e_col = 0
+    for i in range(M-1, 0, -1):
+        if code[s_row][i] == 1:
+            e_col = i
             break
 
-    #암호코드 변환
+      #암호코드 변환
     ans_code = []
 
-    for i in range(s_col, s_col+56, 7):
+    for i in range(e_col-55, e_col+1, 7):
         for ky, val in cypher.items():
             if code[s_row][i:i+7] == val:
                 ans_code.append(ky)
@@ -60,5 +60,3 @@ for tc in range(1, T+1):
         print(f'#{tc} {ans}')
     else:
         print(f'#{tc} 0')
-
-# 뒤에서 찾는 것으로 다시 풀기
