@@ -1,7 +1,6 @@
 # T = int(input())
 # for tc in range(1, T+1):
 #     N = int(input())
-<<<<<<< HEAD
     # room =[]
     # for _ in range(N):
     #     present, back = map(int, input().split())
